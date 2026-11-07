@@ -1,0 +1,59 @@
+{
+  "actorSpecification": 1,
+  "name": "reddit-research-scraper",
+  "title": "Reddit Research Scraper",
+  "description": "Scrape Reddit posts and full comment threads from subreddits, users and post URLs without the Reddit API. Uses the HTML Reddit serves to its own website.",
+  "version": "1.7",
+  "buildTag": "latest",
+  "dockerfile": "./Dockerfile",
+  "input": "./input_schema.json",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "Reddit items",
+      "views": {
+        "all": {
+          "title": "All items",
+          "transformation": {
+            "limit": 1000
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "type": {
+                "label": "Type"
+              },
+              "subreddit": {
+                "label": "Subreddit"
+              },
+              "title": {
+                "label": "Title"
+              },
+              "body": {
+                "label": "Body"
+              },
+              "author": {
+                "label": "Author"
+              },
+              "score": {
+                "label": "Score"
+              },
+              "depth": {
+                "label": "Depth"
+              },
+              "postId": {
+                "label": "Post ID"
+              },
+              "reason": {
+                "label": "Error"
+              },
+              "url": {
+                "label": "URL"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

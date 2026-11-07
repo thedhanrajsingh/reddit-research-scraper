@@ -1,0 +1,143 @@
+{
+  "title": "Reddit Scraper (no API)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "subreddits": {
+      "title": "Subreddits",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Subreddit names without 'r/' (e.g. 'Python').",
+      "prefill": [
+        "Python"
+      ]
+    },
+    "urls": {
+      "title": "Reddit URLs",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Subreddit, user profile or post URLs. Post URLs scrape that post's comments.",
+      "prefill": []
+    },
+    "users": {
+      "title": "Users",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Usernames without 'u/'. Scrapes their submitted posts.",
+      "prefill": []
+    },
+    "searchQueries": {
+      "title": "Search keywords",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [],
+      "description": "Find posts across all of Reddit by keyword, using the Brave Search API (Reddit search itself is not openly accessible). Requires a Brave API key below. Results per keyword follow Max posts per source."
+    },
+    "braveApiKey": {
+      "title": "Brave Search API key",
+      "type": "string",
+      "editor": "textfield",
+      "isSecret": true,
+      "description": "Needed only for Search keywords. Get one at https://brave.com/search/api/ (free tier available). Stored encrypted."
+    },
+    "sort": {
+      "title": "Sort",
+      "type": "string",
+      "enum": [
+        "hot",
+        "new",
+        "top",
+        "rising",
+        "controversial"
+      ],
+      "default": "hot",
+      "description": "Feed sort. User feeds support hot/new/top only."
+    },
+    "timeFilter": {
+      "title": "Time filter",
+      "type": "string",
+      "enum": [
+        "hour",
+        "day",
+        "week",
+        "month",
+        "year",
+        "all"
+      ],
+      "default": "week",
+      "description": "Used with 'top' and 'controversial'."
+    },
+    "maxPostsPerSource": {
+      "title": "Max posts per source",
+      "type": "integer",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Per subreddit / user."
+    },
+    "includeComments": {
+      "title": "Scrape comments",
+      "type": "boolean",
+      "default": true,
+      "description": "Also scrape each post's comment tree."
+    },
+    "maxCommentsPerPost": {
+      "title": "Max comments per post",
+      "type": "integer",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Includes expanded nested replies."
+    },
+    "commentSort": {
+      "title": "Comment sort",
+      "type": "string",
+      "enum": [
+        "top",
+        "best",
+        "new",
+        "controversial",
+        "old",
+        "qa"
+      ],
+      "default": "top",
+      "description": "Order comments are loaded in."
+    },
+    "expandReplies": {
+      "title": "Expand collapsed replies",
+      "type": "boolean",
+      "default": false,
+      "description": "Also load deeper reply threads Reddit collapses behind \"more replies\". Gives complete threads but needs about 3x more requests and gets blocked more often."
+    },
+    "minPostScore": {
+      "title": "Min post score",
+      "type": "integer",
+      "default": 0,
+      "description": "Skip posts below this score."
+    },
+    "includeNSFW": {
+      "title": "Include NSFW",
+      "type": "boolean",
+      "default": false,
+      "description": "Include posts marked 18+."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "description": "Reddit blocks most datacenter IPs. Residential proxies are recommended.",
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      },
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      }
+    }
+  }
+}
